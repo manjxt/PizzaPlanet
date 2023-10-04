@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model PizzaPlanet.Models.PizzaViewModel
+
+<h1>Welcome to PizzaPlanet!</h1>
+<br/>
+
+<div class="row">
+    @foreach (var pizza in Model.Pizzas)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card border-0 shadow" style="background: #ffffff ">
+                <img src="@pizza.ImageUrl" class="card-img-top p-0" alt="@pizza.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@pizza.Name</h5>
+                    <p class="card-text text-nowrap overflow-hidden">@pizza.Description</p>
+                    <p class="card-text">Price: Rs.@pizza.Price</p>
+                    <!-- Add a form to send POST request to AddToCart action -->
+                    <form method="post" action="@Url.Action("AddToCart", "Home")">
+                        <input type="hidden" name="pizzaId" value="@pizza.Id" />
+                        <input type="hidden" name="quantity" value="1" />
+                        <button type="submit" class="btn btn-primary">
+                            @{
+                                var pizzaId = pizza.Id;
+                                var quantity = Model.PizzaQuantities.ContainsKey(pizzaId)
+                                ? Model.PizzaQuantities[pizzaId]
+                                : 0;
+                            }
+                          
+                            <span>Add to Cart</span>
+
+                           
+                        </button>
+                        @if (quantity > 0)
+                        {
+                            <div style="position: absolute; right: 25px; bottom: 7px;">
+                                <p style="color: green; font-weight: bold">x @(quantity) in Cart</p>
+                            </div>
+                        }
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+

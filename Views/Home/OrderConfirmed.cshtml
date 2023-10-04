@@ -1,0 +1,62 @@
+﻿@model PizzaPlanet.Models.Order
+
+
+@{
+    ViewData["Title"] = "Order Confirmed";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlz9yVZhpNZF1OdxN+flMMJlBD4Xos8a9oXnTp3Qf4Cm1Z2qq7p0KJKd5t6
+2yW+rw" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="col">
+            <div class="text-center">
+                <img src="~/pizzaorder.png" alt="Cooking Pizza" style="width: 150px; height: auto;" />
+                <h1 class="display-6">Thank You for Ordering!</h1>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <h2 class="mb-3">Order Details</h2>
+                <table class="table table-striped table-light">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var orderDetail in Model.OrderDetails)
+                        {
+                            <tr>
+                                <td>@orderDetail.Pizza.Name</td>
+                                <td>Rs.@orderDetail.Price</td>
+                                <td>@orderDetail.Quantity</td>
+                                <td>Rs.@(orderDetail.Price * orderDetail.Quantity)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <h5 class="bg-white p-3 text-end text-primary">Total Price: Rs.@Model.OrderDetails.Sum(orderDetail => orderDetail.Price * orderDetail.Quantity)</h5>
+                <br />
+                
+            </div>
+           
+            <h5 class="text-success">Your order is confirmed and will reach you shortly.</h5>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-MFk5booPq9zcp4Wv5nTzzzu5zRb0WxfjHH7Jc3l5cK1a3pgLw8C+Sb5X7f/kxMfjh
+T" crossorigin="anonymous"></script>
+</body>
+</html>

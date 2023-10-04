@@ -1,0 +1,27 @@
+
+
+body {
+    background-color: #f6f3d8;
+    background-size: cover; /* Adjust this property to control how the image covers the background */
+    background-attachment: fixed; /* Fixed background scrolling */
+}
+
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
